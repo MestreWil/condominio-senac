@@ -19,48 +19,52 @@ class Apartamento:
         self.torre = torre
         self.vaga = 0
 
-
     def cadastrar(self):
         pass
 
     def imprimir(self):
-        pass
+        vaga = ""
+        if self.vaga > 10:
+            vaga = "Esta apartamento está na fila de espera"
+        else:
+            vaga = f"{self.vaga}"
+        return f"Numero: {self.numero}\nTorre: {self.torre.imprimir()}\nVaga: {vaga}"
 
 
 class Fila:
-    class No:
-        def __init__(self, valor):
-            self.dado = valor
-            self.proximo = None
+      class No:
+            def __init__(self, valor):
+                  self.dado = valor
+                  self.proximo = None
 
-    def __init__(self):
-        self.primeiro = None
-        self.ultimo = None
-        self._tamanho = 0
+      def __init__(self):
+            self.primeiro = None
+            self.ultimo = None
+            self._tamanho = 0
 
-    def adicionar(self, elem):
-        nodo = No(elem)
-        if self.ultimo is None and self._tamanho != 0:
-            self.ultimo = nodo
-        else:
-            self.ultimo.proximo = nodo
-            self.last = nodo
-        if self.primeiro is None and self._tamanho != 0:
-            self.primeiro = nodo
+      def adicionar(self, elem):
+            nodo = No(elem)
+            if self.ultimo is None:
+                  self.ultimo = nodo
+            else:
+                  self.ultimo.proximo = nodo
+                  self.last = nodo
+            if self.primeiro is None:
+                  self.primeiro = nodo
 
-        self._tamanho += 1
+            self._tamanho += 1
 
-    def retirar(self):
+      def retirar(self):
 
-        if len(self) is not None:
-            elem = self.primeiro.dado
-            self.primeiro = self.primeiro.proximo
-            self._tamanho -= 1
-            return elem
-        raise IndexError("A FILA está vazia.")
+            if len(self) is not None:
+                  elem = self.primeiro.dado
+                  self.primeiro = self.primeiro.proximo
+                  self._tamanho -= 1
+                  return elem
+            raise IndexError("A FILA está vazia.")
 
-    def __len__(self):
-        return self._tamanho
+      def __len__(self):
+            return self._tamanho
 
 
 class Lista:
@@ -75,7 +79,7 @@ class Lista:
     def __init__(self):
         self.__cabeca = None
         self.__quantidade = 0
-
+      
     def __getitem__(self, posicao):
 
         if isinstance(posicao, slice):
