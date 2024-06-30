@@ -48,7 +48,9 @@ class Fila:
             self.primeiro = None
             self.ultimo = None
             self._tamanho = 0
-
+      def __str__(self):
+        return  "\n".join([str(valor) for valor in self]) + "\n"
+  
       def adicionar(self, elem):
             nodo = No(elem)
             if self.ultimo is None:
