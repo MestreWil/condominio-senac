@@ -1,34 +1,41 @@
 class Torre:
 
-    def __init__(self, nome, endereco):
-        self.id = 0
-        self.nome = nome
-        self.endereco = endereco
+      def __init__(self, nome, endereco):
+            self.id = 0
+            self.nome = nome
+            self.endereco = endereco
+      def __str__(self): 
+            return f"Nome: {self.nome}\nEndereco: {self.endereco}\n"
+      
+      def cadastrar(self):
+            pass
+      
 
-    def cadastrar(self):
-        pass
-
-    def imprimir(self):
-        return f"Nome: {self.nome}\nEndereco: {self.endereco}\n"
+      def imprimir(self):
+            return str(self)
 
 
 class Apartamento:
-    def __init__(self, numero, torre, vaga):
-        self.id = 0
-        self.numero = numero
-        self.torre = torre
-        self.vaga = 0
+      def __init__(self, numero):
+            self.id = 0
+            self.numero = numero
+            self.torre = None
+            self.vaga = 0
 
-    def cadastrar(self):
-        pass
+      def cadastrar(self, torre):    
+            self.torre = torre
+            print("Torre cadastrada.")
+            return 
+      def __str__(self):
+            vaga = ""
+            if self.vaga > 10:
+                  vaga = "Esta apartamento está na fila de espera"
+            else:
+                  vaga = f"{self.vaga}"
+            return f"Numero: {self.numero}\nTorre: {str(self.torre)}\nVaga: {vaga}\n"
 
-    def imprimir(self):
-        vaga = ""
-        if self.vaga > 10:
-            vaga = "Esta apartamento está na fila de espera"
-        else:
-            vaga = f"{self.vaga}"
-        return f"Numero: {self.numero}\nTorre: {self.torre.imprimir()}\nVaga: {vaga}"
+      def imprimir(self):
+            return str(self)
 
 
 class Fila:
@@ -79,7 +86,7 @@ class Lista:
     def __init__(self):
         self.__cabeca = None
         self.__quantidade = 0
-      
+
     def __getitem__(self, posicao):
 
         if isinstance(posicao, slice):
@@ -113,7 +120,7 @@ class Lista:
             atual = atual.proximo
 
     def __str__(self):
-        return "[" + " ,".join([str(valor) for valor in self]) + "]"
+        return  "\n".join([str(valor) for valor in self]) + "\n"
 
     def __len__(self):
         return self.__quantidade
@@ -140,3 +147,14 @@ class Lista:
 
         novo.proximo = atual.proximo
         atual.proximo = novo
+
+# lista = Lista()
+# ap1 = Apartamento("1515")
+# ap2 = Apartamento("3435")
+# ap3 = Apartamento("2324")
+# lista.inserir(0, ap1)
+# lista.inserir(1, ap2)
+# lista.inserir(2, ap3)
+# print(str(lista))
+# print(len(lista))
+# print(len(lista))

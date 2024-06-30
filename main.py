@@ -15,23 +15,39 @@ menu = """
     6- Remover torre cadastrada
     """
 def menu_principal():
-      escolha = input(menu + "\nDigite aqui: ")
       while True:
-            match escolha:
-                  case 0:
-                        print("Até mais tarde!")
-                        break
-                  case 1:
-                        pass
-                  case 2:
-                        pass
-                  case 3:
-                        pass
-                  case 4:
-                        pass
-                  case 5:
-                        pass
-                  case 6:
-                        pass
+            escolha = int(input(menu + "\nDigite aqui: "))
+            if escolha == 0:
+                  print("Até mais tarde!")
+                  break
+            elif escolha == 1:
+                  if len(lista_de_apartamentos) == 0:
+                        print("Desculpe, não podemos cadastrar essa Torre pois não tem nenhum apartamento cadastrado!\n")
+                        input("Aperte qualquer tecla para continuar: ")
+                  else:
+                        nome = input("Digite o nome da Torre: ")
+                        endereco = input("Digite o endereco: ")
+                        torre = Torre(nome, endereco)
+                        print(str(lista_de_apartamentos))
+                        num = int(input("Digite o apartamento que você deseja essa Torre: "))
+                        apto = lista_de_apartamentos[num]
+                        apto.cadastrar(torre)
+                  
+            elif escolha == 2:
+                  num = input("Digite o número do apartamento: ")
+                  apto = Apartamento(num)
+                  if len(lista_de_apartamentos) <= 10:
+                        lista_de_apartamentos.inserir(0, apto)
+                  else:
+                        fila_de_espera.adicionar(apto)
+            elif escolha == 3:
+                  print(str(lista_de_apartamentos))
+                  input("Aperte ENTER para continuar")                   
+            elif escolha == 4:
+                  pass
+            elif escolha == 5:
+                  pass
+            elif escolha == 6:
+                  pass
 if __name__ == "__main__":
-  pass
+      menu_principal()
