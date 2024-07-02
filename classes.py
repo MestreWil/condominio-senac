@@ -127,11 +127,15 @@ class Lista:
                   raise IndexError("Posicao invalida")
             self.__quantidade -= 1
             
-            if posicao == 0:
-                  self.__cabeca = self.__cabeca.proximo
-                  if self.__cabeca is None:
-                        self.__ca
-                  return
+            i = 0
+            atual = self.__cabeca
+            while atual.proximo is not None and i < posicao - 1:
+                  atual = atual.proximo
+                  i += 1
+                  
+            atual.proximo = atual.proximo.proximo
+            
+            
       def __str__(self):
             return  "\n".join([str(valor) for valor in self]) + "\n"
 

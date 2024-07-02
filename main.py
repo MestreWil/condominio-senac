@@ -63,7 +63,7 @@ def menu_principal():
                   input("Aperte ENTER para continuar")
             elif escolha == 5:
                   print(str(lista_de_apartamentos))
-                  print(str(fila_de_espera))
-                  
+                  num = int(input("Digite o indice que deseja remover: "))
+                  del lista_de_apartamentos[num]                  
 if __name__ == "__main__":
       menu_principal()
