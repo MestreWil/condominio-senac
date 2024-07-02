@@ -48,6 +48,12 @@ class Fila:
             self.primeiro = None
             self.ultimo = None
             self._tamanho = 0
+
+      def __iter__(self):
+            atual = self.primeiro
+            while atual is not None:
+                  yield atual.valor
+                  atual = atual.proximo
       def __str__(self):
         return  "\n".join([str(valor) for valor in self]) + "\n"
   
