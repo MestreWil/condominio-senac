@@ -20,7 +20,7 @@ class Apartamento:
             self.id = 0
             self.numero = numero
             self.torre = None
-            self.vaga = 0
+            self.vaga = None
 
       def cadastrar(self, torre):    
             self.torre = torre

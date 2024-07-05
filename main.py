@@ -37,7 +37,7 @@ def cadastrar_apto():
       apto = Apartamento(num)
       if len(lista_de_apartamentos) <= 10:
             garagem = 0
-            garagem += 1 
+            garagem += len(lista_de_apartamentos) + 1
             apto.vaga = garagem 
             lista_de_apartamentos.inserir(0, apto)
       else:
