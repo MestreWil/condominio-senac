@@ -93,6 +93,7 @@ class Lista:
 
       def __init__(self):
             self.__cabeca = None
+            self.__cauda = None
             self.__quantidade = 0
 
       def __getitem__(self, posicao):
@@ -126,6 +127,7 @@ class Lista:
             while atual is not None:
                   yield atual.valor
                   atual = atual.proximo
+                  
       def __delitem__(self, posicao):
             if posicao < 0:
                   posicao = len(posicao) + posicao
@@ -133,17 +135,39 @@ class Lista:
                   raise IndexError("Posicao invalida")
             self.__quantidade -= 1
             
+            if posicao == 0:
+                  self.__cabeca = self.__cabeca.proximo
+                  if self.__cabeca is None:
+                        self.__cauda = None
+                  return
             i = 0
             atual = self.__cabeca
-            while atual.proximo is not None and i < posicao - 1:
+            while atual.proximo is not None and i < posicao -1:
                   atual = atual.proximo
                   i += 1
+                  
+            if atual.proximo == self.__cauda:
+                  self.__cauda = atual
                   
             atual.proximo = atual.proximo.proximo
             
             
+            
       def __str__(self):
             return  "\n".join([str(valor) for valor in self]) + "\n"
+
+      def inserir_no_fim(self, valor):
+            novo = self.No(valor)
+            self.__quantidade += 1
+            
+            if self.__cabeca is None:
+                  self.__cabeca = novo
+                  self.__cauda = novo
+                  return
+            
+            self.__cauda.proximo = novo
+            self.__cauda = novo
+            
 
       def __len__(self):
             return self.__quantidade
@@ -154,6 +178,7 @@ class Lista:
         # Quando a lista é vazia
             if self.__cabeca is None:
                   self.__cabeca = novo
+                  self.__cauda = novo
                   return
 
         # Inserir na cabeca (primeira posicao)
@@ -168,17 +193,10 @@ class Lista:
                   atual = atual.proximo
                   i += 1
 
+            if atual.proximo is None:
+                  self.__cauda = novo
+
             novo.proximo = atual.proximo
             atual.proximo = novo
 
 
-# lista = Lista()
-# ap1 = Apartamento("1515")
-# ap2 = Apartamento("3435")
-# ap3 = Apartamento("2324")
-# lista.inserir(0, ap1)
-# lista.inserir(1, ap2)
-# lista.inserir(2, ap3)
-# print(str(lista))
-# print(len(lista))
-# print(len(lista))

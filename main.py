@@ -39,7 +39,7 @@ def cadastrar_apto():
             garagem = 0
             garagem += len(lista_de_apartamentos) + 1
             apto.vaga = garagem 
-            lista_de_apartamentos.inserir(0, apto)
+            lista_de_apartamentos.inserir_no_fim(apto)
       else:
             fila_de_espera.adicionar(apto)
             
@@ -62,8 +62,15 @@ def menu_principal():
                   print(str(fila_de_espera))
                   input("Aperte ENTER para continuar")
             elif escolha == 5:
-                  print(str(lista_de_apartamentos))
-                  num = int(input("Digite o indice que deseja remover: "))
-                  del lista_de_apartamentos[num]                  
+                  escolha = int(input('\nDigite 1 se quiser remover da lista.\nDigite 2 se quiser remover da fila.\n'))
+                  if escolha == 1:
+                        print(str(lista_de_apartamentos))
+                        num = int(input("Digite o indice que deseja remover: "))
+                        del lista_de_apartamentos[num]
+                  elif escolha == 2:
+                        input('Essa função removera o elemento do topo da fila')
+                        print(str(fila_de_espera))
+                        fila_de_espera.remover()
+                                        
 if __name__ == "__main__":
       menu_principal()
