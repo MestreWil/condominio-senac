@@ -70,7 +70,7 @@ def menu_principal():
                   elif escolha == 2:
                         input('Essa função removera o elemento do topo da fila')
                         print(str(fila_de_espera))
-                        fila_de_espera.remover()
+                        fila_de_espera.retirar()
                                         
 if __name__ == "__main__":
       menu_principal()
