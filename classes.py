@@ -28,7 +28,7 @@ class Apartamento:
             return 
       def __str__(self):
             vaga = ""
-            if self.vaga > 10:
+            if self.vaga == None:
                   vaga = "Esta apartamento está na fila de espera"
             else:
                   vaga = f"{self.vaga}"
@@ -40,8 +40,8 @@ class Apartamento:
 
 class Fila:
       class No:
-            def __init__(self, valor):
-                  self.dado = valor
+            def __init__(self, valor, proximo=None):
+                  self.valor = valor
                   self.proximo = None
 
       def __init__(self):
@@ -58,12 +58,12 @@ class Fila:
         return  "\n".join([str(valor) for valor in self]) + "\n"
   
       def adicionar(self, elem):
-            nodo = No(elem)
+            nodo = self.No(elem)
             if self.ultimo is None:
                   self.ultimo = nodo
             else:
                   self.ultimo.proximo = nodo
-                  self.last = nodo
+                  self.ultimo = nodo
             if self.primeiro is None:
                   self.primeiro = nodo
 
@@ -72,7 +72,7 @@ class Fila:
       def retirar(self):
 
             if len(self) is not None:
-                  elem = self.primeiro.dado
+                  elem = self.primeiro.valor
                   self.primeiro = self.primeiro.proximo
                   self._tamanho -= 1
                   return elem

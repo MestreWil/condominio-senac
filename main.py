@@ -35,7 +35,7 @@ def cadastrar_torre():
 def cadastrar_apto():
       num = input("Digite o número do apartamento: ")
       apto = Apartamento(num)
-      if len(lista_de_apartamentos) <= 10:
+      if len(lista_de_apartamentos) < 2:
             garagem = 0
             garagem += len(lista_de_apartamentos) + 1
             apto.vaga = garagem 
@@ -70,7 +70,7 @@ def menu_principal():
                   elif escolha == 2:
                         input('Essa função removera o elemento do topo da fila')
                         print(str(fila_de_espera))
-                        fila_de_espera.remover()
+                        fila_de_espera.retirar()
                                         
 if __name__ == "__main__":
       menu_principal()
