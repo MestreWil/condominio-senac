@@ -16,16 +16,15 @@ class Torre:
 
 
 class Apartamento:
-      def __init__(self, numero):
+      def __init__(self, numero, torre):
             self.id = 0
             self.numero = numero
-            self.torre = None
-            self.vaga = None
-
-      def cadastrar(self, torre):    
             self.torre = torre
-            print("Torre cadastrada.")
-            return 
+            self.vaga = None
+            self.proximo = None
+
+      def cadastrar(self):    
+            pass
       def __str__(self):
             vaga = ""
             if self.vaga == None:
@@ -39,57 +38,46 @@ class Apartamento:
 
 
 class Fila:
-      class No:
-            def __init__(self, valor, proximo=None):
-                  self.valor = valor
-                  self.proximo = None
 
       def __init__(self):
             self.primeiro = None
-            self.ultimo = None
-            self._tamanho = 0
+            self.___quantidade = 0
 
       def __iter__(self):
             atual = self.primeiro
             while atual is not None:
-                  yield atual.valor
+                  yield atual
                   atual = atual.proximo
+
       def __str__(self):
         return  "\n".join([str(valor) for valor in self]) + "\n"
   
-      def adicionar(self, elem):
-            nodo = self.No(elem)
-            if self.ultimo is None:
-                  self.ultimo = nodo
-            else:
-                  self.ultimo.proximo = nodo
-                  self.ultimo = nodo
+      def adicionar(self, apart):
             if self.primeiro is None:
-                  self.primeiro = nodo
-
-            self._tamanho += 1
+                  self.primeiro = apart
+            else:
+                  atual = self.primeiro
+                  while atual.primeiro:
+                        atual = atual.proximo
+                  atual.proximo = apart
+                  
+            self.___quantidade += 1
 
       def retirar(self):
 
             if len(self) is not None:
-                  elem = self.primeiro.valor
+                  elem = self.primeiro
                   self.primeiro = self.primeiro.proximo
-                  self._tamanho -= 1
+                  self.___quantidade -= 1
+                  elem.proximo = None
                   return elem
             raise IndexError("A FILA está vazia.")
 
       def __len__(self):
-            return self._tamanho
+            return self.___quantidade
 
 
 class Lista:
-      class No:
-            def __init__(self, valor, proximo=None):
-                  self.valor = valor
-                  self.proximo = None
-
-            def __str__(self):
-                  return str(self.valor)
 
       def __init__(self):
             self.__cabeca = None
@@ -108,7 +96,7 @@ class Lista:
                         fim = posicao.stop if posicao.stop is not None else len(self)
                   else:
                         inicio = posicao.start if posicao.start is not None else len(self) - 1
-                        fim = posicao.stop if psoicao.stop is not None else -1
+                        fim = posicao.stop if posicao.stop is not None else -1
 
             if posicao < 0:
                   posicao = len(self) + posicao
@@ -125,7 +113,7 @@ class Lista:
       def __iter__(self):
             atual = self.__cabeca
             while atual is not None:
-                  yield atual.valor
+                  yield atual
                   atual = atual.proximo
                   
       def __delitem__(self, posicao):
@@ -172,31 +160,37 @@ class Lista:
       def __len__(self):
             return self.__quantidade
 
-      def inserir(self, posicao, valor):
-            novo = self.No(valor)
+      def inserir(self, valor):
+            if self.__cabeca: 
+                  cabeca = self.__cabeca
+                  while cabeca.proximo:
+                        cabeca = cabeca.proximo
+                  cabeca.proximo = valor
+            else:
+                  self.__cabeca = valor
             self.__quantidade += 1
-        # Quando a lista é vazia
-            if self.__cabeca is None:
-                  self.__cabeca = novo
-                  self.__cauda = novo
-                  return
-
-        # Inserir na cabeca (primeira posicao)
-            if posicao <= 0:
-                  novo.proximo = self.__cabeca
-                  self.__cabeca = novo
-                  return
-
-            i = 0
-            atual = self.__cabeca
-            while atual.proximo is not None and i < posicao - 1:
-                  atual = atual.proximo
-                  i += 1
-
-            if atual.proximo is None:
-                  self.__cauda = novo
-
-            novo.proximo = atual.proximo
-            atual.proximo = novo
-
+      
+      def retirar(self, vaga):
+        if self.__cabeca is None:
+            raise IndexError("A lista está vazia.")
+        
+        if self.__cabeca.vaga == vaga: #verifica se o objeto no __cabeca corresponde ao parametro
+            item_removido = self.__cabeca
+            self.__cabeca = item_removido.proximo
+            item_removido.proximo = None
+            self.__quantidade -= 1
+            return item_removido
+        
+        anterior = self.__cabeca
+        atual = self.__cabeca.proximo
+        while atual: #loop para percorrer a lista enquanto houver um proximo
+            if atual.vaga == vaga:
+                anterior.proximo = atual.proximo 
+                atual.proximo = None
+                self.__quantidade -= 1
+                return atual
+            anterior = atual
+            atual = atual.proximo
+        
+        raise ValueError("Apartamento com a vaga especificada não encontrado.")
 
