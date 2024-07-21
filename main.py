@@ -13,24 +13,6 @@ menu = """
     4- Desapropriar Vaga
     """
     
-# def cadastrar_torre():
-#       if len(lista_de_apartamentos) == 0:
-#             print("Desculpe, não podemos cadastrar essa Torre pois não tem nenhum apartamento cadastrado!\n")
-#             input("Aperte qualquer tecla para continuar: ")
-#       else:
-#             nome = input("Digite o nome da Torre: ")
-#             endereco = input("Digite o endereco: ")
-#             torre = Torre(nome, endereco)
-#             if len(lista_de_apartamentos) != 10:
-#                   print(str(lista_de_apartamentos))
-#                   num = int(input("Digite o apartamento que você deseja essa Torre: "))
-#                   apto = lista_de_apartamentos[num]
-#                   apto.cadastrar(torre)
-#             else:
-#                   print(str(fila_de_espera))
-#                   num = int(input("Digite o apartamento que você deseja essa Torre: "))
-#                   apto = fila_de_espera[num]
-#                   apto.cadastrar(torre)
 torre1 = Torre("Terra Nova", "Parternon, 1515")
 torre2 = Torre("Atlandida", "Tristeza, 9087")
 torre3 = Torre("Sans Serif", "Centro Historico, 1406")
@@ -80,7 +62,7 @@ def liberar_vaga():
         apto_fila.vaga = vaga
         lista_de_apartamentos.inserir(apto_fila)
         print(f"Apartamento {apto_fila.numero} da {apto_fila.torre.nome} foi movido para a vaga {vaga}.")
-    
+    apto_removido.vaga = None
     fila_de_espera.adicionar(apto_removido)
             
 def menu_principal():
